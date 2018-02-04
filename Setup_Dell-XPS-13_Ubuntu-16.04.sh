@@ -1,8 +1,8 @@
 ###########################################################################################################################
 #!/bin/bash
 ###########################################################################################################################
-if [ ! -f $ALIASFILE ]; then
-	touch $ALIASFILE
+if [ ! -f ${HOME}/.bash_aliases ]; then
+	touch ${HOME}/.bash_aliases
 	ALIASES=(
 		"alias sudo='sudo '"
 		"alias cp='cp -i -r -u -v'"
@@ -90,7 +90,7 @@ if [ -f /usr/share/applications/$i ] && [ ! -f ${HOME}/.local/share/applications
 	echo NoDisplay=true >> ${HOME}/.local/share/applications/$i 
 fi
 done
-if [ -f /usr/shar/applications/thunderrbird.desktop ] && [ ! ${HOME}/.local/share/applications/thunderbird.desktop ]; then
+if [ -f /usr/share/applications/thunderbird.desktop ] && [ ! -f ${HOME}/.local/share/applications/thunderbird.desktop ]; then
 	cp -v /usr/share/applications/thunderbird.desktop ${HOME}/.local/share/applications/thunderbird.desktop
 	sed -i -e 's/Icon=thunderbird/Icon=thunderbird-branded/g' ${HOME}/.local/share/applications/thunderbird.desktop
 fi
@@ -116,34 +116,16 @@ gsettings set org.gnome.desktop.wm.preferences theme "Numix"
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
 gsettings set com.canonical.Unity.Launcher favorites "['application://org.gnome.Nautilus.desktop', 'application://firefox.desktop', 'application://thunderbird.desktop', 'application://gedit.desktop', 'application://gnome-terminal.desktop', 'application://unity-control-center.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']"
 ###########################################################################################################################
-if [ ! -f /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla ]
-	sudo bash -c \
-	'cat << EOF > /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
-	[Re-enable hibernate by default in upower]
-	Identity=unix-user:*
-	Action=org.freedesktop.upower.hibernate
-	ResultActive=yes
-	
-	[Re-enable hibernate by default in logind]
-	Identity=unix-user:*
-	Action=org.freedesktop.login1.hibernate;org.freedesktop.login1.handle-hibernate-key;org.freedesktop.login1;org.freedesktop.login1.hibernate-multiple-sessions;org.freedesktop.login1.hibernate-ignore-inhibit
-	ResultActive=yes
-	EOF'
-fi
-###########################################################################################################################
-if [ ! -f ${HOME}/.local/bin/autobgch.sh ]; then
-	cat << EOF > ${HOME}/.local/bin/autobgch.sh
-	\#!/bin/bash
-	WPDIR="${HOME}/Pictures/Wallpapers"
-	cd "WPDIR"
-	while [ 1 ]
-	do
-	set -- *
-	LENGTH=$#
-	RNDNUM=$((( $RANDOM % ($LENGTH) ) +1))
-	gsettings set org.gnome.desktop.background picture-uri "file://$WPDIR/${!RNDNUM}"
-	sleep 600
-	done
-	EOF
+if [ ! -f /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla ]; then
+sudo bash -c "/bin/cat << EOF > /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
+[Re-enable hibernate by default in upower]
+Identity=unix-user:*
+Action=org.freedesktop.upower.hibernate
+ResultActive=yes
+[Re-enable hibernate by default in logind]
+Identity=unix-user:*
+Action=org.freedesktop.login1.hibernate;org.freedesktop.login1.handle-hibernate-key;org.freedesktop.login1;org.freedesktop.login1.hibernate-multiple-sessions;org.freedesktop.login1.hibernate-ignore-inhibit
+ResultActive=yes
+EOF"
 fi
 ###########################################################################################################################
