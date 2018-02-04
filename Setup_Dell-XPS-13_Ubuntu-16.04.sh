@@ -109,10 +109,8 @@ fi
 ###########################################################################################################################
 if [ -f ${HOME}/examples.desktop ]; then rm -v ${HOME}/examples.desktop 2>/dev/null; fi
 ###########################################################################################################################
-gsettings set com.canonical.indicator.appmenu menu-mode "global"
 gsettings set org.gnome.desktop.interface gtk-theme "Numix"
 gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
-gsettings set org.gnome.desktop.wm.preferences theme "Numix"
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
 gsettings set com.canonical.Unity.Launcher favorites "['application://org.gnome.Nautilus.desktop', 'application://firefox.desktop', 'application://thunderbird.desktop', 'application://gedit.desktop', 'application://gnome-terminal.desktop', 'application://unity-control-center.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']"
 ###########################################################################################################################
