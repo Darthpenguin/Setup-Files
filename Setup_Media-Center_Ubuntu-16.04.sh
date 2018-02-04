@@ -102,10 +102,10 @@ if [ -f /usr/share/applications/$i ] && [ ! -f ${HOME}/.local/share/applications
 	    echo NoDisplay=true >> ${HOME}/.local/share/applications/$i 
 fi
 done
-if [ -f /usr/share/applications/display-im6.q16.desktop ] && [ ! -f ${HOME}/.local/share/applications/$i ]; then
+if [ -f /usr/share/applications/display-im6.q16.desktop ] && [ ! -f ${HOME}/.local/share/applications/display-im6.q16.desktop ]; then
       cp -v /usr/share/applications/display-im6.q16.desktop ${HOME}/.local/share/applications/display-im6.q16.desktop
       echo >> ${HOME}/.local/share/applications/display-im6.q16.desktop
-      echo NoDisplay=true >> ${HOME}/.local/share/applications/display-im.q16.desktop
+      echo NoDisplay=true >> ${HOME}/.local/share/applications/display-im6.q16.desktop
 fi
 if [ -f /usr/share/applications/gnome-mpv.desktop ] && [ ! -f ${HOME}/.local/share/applications/gnome-mpv.desktop ]; then
   		cp -v /usr/share/applications/gnome-mpv.desktop ${HOME}/.local/share/applications/gnome-mpv.desktop
