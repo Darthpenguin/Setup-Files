@@ -15,6 +15,7 @@ if [ ! -f ${HOME}/.bash_aliases ]; then
 		"alias move='mv -i -u -v'"
 		"alias df='df -h / /mnt'"
 		"alias grep='grep -i'"
+		"alias ls='ls -h --color=always'"
 		"alias handbrake-cli='HandBrakeCLI'"
 		"alias logoff='gnome-session-quit --logout --no-prompt'"
 		)
