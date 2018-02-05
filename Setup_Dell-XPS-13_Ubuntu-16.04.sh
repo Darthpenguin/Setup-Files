@@ -93,8 +93,7 @@ fi
 done
 if [ -f /usr/share/applications/display-im6.q16.desktop ] && [ ! -f ${HOME}/.local/share/applications/display-im6.q16.desktop ]; then
 	cp -v /usr/share/applications/display-im.q16.desktop ${HOME}/.local/share/applications/display-im6.q16.desktop
-	echo >> ${HOME}/.local/share/applications/display-im6.q16.desktop
-	echo NoDisplay=true >> ${HOME}/.local/share/applications/display-im6.q16.desktop
+	printf "\nNoDisplay=true" >> ${HOME}/.local/share/applications/display-im6.q16.desktop
 fi
 if [ -f /usr/share/applications/thunderbird.desktop ] && [ ! -f ${HOME}/.local/share/applications/thunderbird.desktop ]; then
 	cp -v /usr/share/applications/thunderbird.desktop ${HOME}/.local/share/applications/thunderbird.desktop
