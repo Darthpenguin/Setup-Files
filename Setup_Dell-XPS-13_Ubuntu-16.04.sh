@@ -79,7 +79,7 @@ done
 ###########################################################################################################################
 NODSPLY=(
 	"checkbox-converged.desktop" "dell-driver-installer.desktop" "dell-recovery-media.desktop"
-	"display-im6.desktop" "display-im6.q16.desktop" "itweb-settings.desktop"
+	"display-im6.desktop" "display-im6.q16.desktop" "itweb-settings.desktop" "nm-connection-editor.desktop"
 	"openjdk-8-policytool.desktop" "logout.desktop" "reboot.desktop" "shutdown.desktop"
 	"unity-user-accounts-panel.desktop" "unity-wacom-panel.desktop" "xdiagnose.desktop"
 	"software-properties-drivers.desktop" "ccsm.desktop" "mpv.desktop" "tilda.desktop"
