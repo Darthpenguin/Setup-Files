@@ -104,7 +104,11 @@ if [ -f /usr/share/applications/gnome-mpv.desktop ] && [ ! -f ${HOME}/.local/sha
 	cp -v /usr/share/applications/gnome-mpv.desktop ${HOME}/.local/share/applications/gnome-mpv.desktop
 	sed -i -e 's/Icon=gnome-mpv/Icon=totem/g' ${HOME}/.local/share/applications/gnome-mpv.desktop
 fi
-###########################################################################################################################
+#################################################################################################################################
+if [ -f /usr/share/gconf/defaults/40_oem-superkey-workaround ]; then
+	sudo rm –rf /usr/share/gconf/defaults/40_oem-superkey-workaround
+fi
+#################################################################################################################################
 if [ $(dpkg-query -W -f='${Status}' google-chrome-stable 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	rm -v ${HOME}/.gnome/apps/chrome-*-Default.desktop 2>/dev/null
 	rm -v ${HOME}/.config/google-chrome/chrome_shutdown_ms.txt 2>/dev/null 
