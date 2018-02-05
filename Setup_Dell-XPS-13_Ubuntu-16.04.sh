@@ -38,7 +38,7 @@ GTFOPKG=(
  	"google-chrome-stable" "chromium-browser" "gnome-disk-utility" "rhythmbox"
 	"gnome-mahjongg" "gnome-mines" "gnome-software" "gnome-sudoku" "aisleriot"
 	"gwakeonlan" "libreoffice-common" "onboard" "totem" "ubuntu-software" "shotwell"
-	"vino" "wakeonlan" "gallery-app" "transmission-gtk" "webbrowser-app"
+	"vino" "wakeonlan" "gallery-app" "webbrowser-app"
 	"unity-scope-calculator" "unity-scope-chromiumbookmarks" "unity-scope-colourlovers"
 	"unity-scope-devhelp" "unity-scope-gdrive" "unity-scope-manpages" "unity-scope-openclipart"
 	"unity-scope-texdoc" "unity-scope-tomboy" "unity-scope-video-remote" "unity-scope-virtualbox"
