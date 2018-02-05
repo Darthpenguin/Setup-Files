@@ -4,20 +4,20 @@
 if [ ! -f ${HOME}/.bash_aliases ]; then
 	touch ${HOME}/.bash_aliases
 	ALIASES=(
-		"alias sudo='sudo '"
-		"alias cp='cp -i -r -u -v'"
-		"alias copy='cp -i -r -u -v'"
-		"alias rm='rm -I -d -v'"
-		"alias remove='rm -I -d -v'"
-		"alias del='rm -I -d -v'"
-		"alias delete='rm -I -d -v'"
-		"alias mv='mv -i -u -v'"
-		"alias move='mv -i -u -v'"
-		"alias df='df -h / /mnt'"
-		"alias grep='grep -i'"
-		"alias ls='ls -h --color=always'"
-		"alias handbrake-cli='HandBrakeCLI'"
-		"alias logoff='gnome-session-quit --logout --no-prompt'"
+		"alias sudo='sudo '" #Because sudo doesn't accept my aliases with out this. I don't know why.
+		"alias cp='cp -i -r -u -v'" #Because I always want verbosity. We all want verbosity damint!
+		"alias copy='cp -i -r -u -v'" #Because sometimes I type 'copy'.
+		"alias rm='rm -I -d -v'"  #Again. Why is verbosity *not* the default?
+		"alias remove='rm -I -d -v'" #Room a file? What the fu- Oh! *REMOVE*. Okay, fine. Whatever.
+		"alias del='rm -I -d -v'" #Now it's even easier to delete files!
+		"alias delete='rm -I -d -v'" #Don't know why I did this. I'll never type 'delete'
+		"alias mv='mv -i -u -v'" #Cool, a movie program. No, wait... it's short for *move*. ... F@#k.
+		"alias move='mv -i -u -v'" #There! Now it's not f@#k!ng ambiguious.
+		"alias df='df -h /'" #What's all that other sh!t that df prints? All I want is the disk usage of my drive.
+		"alias grep='grep -i'" #Because screw you and your case sensitivity.
+		"alias ls='ls -h --color=always'" #Yes I want it to be human readable. I'm not a F@#k!ng machine.
+		"alias handbrake-cli='HandBrakeCLI'" #No terminal command should have capitals.
+		"alias logoff='gnome-session-quit --logout --no-prompt'" #Because sometimes you just need to rage-quit.
 		)
 	for i in "${ALIASES[@]}" ; do
 		if [ $(cat ${HOME}/.bash_aliases 2>/dev/null | grep -c "$i") -eq 0 ]; then
