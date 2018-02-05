@@ -21,11 +21,12 @@ if [ ! -f ${HOME}/.bash_aliases ]; then
 		)
 	for i in "${ALIASES[@]}" ; do
 		if [ $(cat ${HOME}/.bash_aliases 2>/dev/null | grep -c "$i") -eq 0 ]; then
-			echo $i >> ${HOME}/.bash_aliases
+			echo $i >> ${HOME}/.bash_aliases #Err.. is that going to echo the above comments into the file? I dunno.
 		fi
 	done
 fi
 ###########################################################################################################################
+# All this sh!t does is make a .local/bin directory and add it to the $PATH
 if [ ! -d ${HOME}/.local/bin ]; then mkdir ${HOME}/.local/bin; fi
 export PROFILE=${HOME}/.profile
 	if [ $(cat $PROFILE 2>/dev/null | grep -c "PATH=$PATH:${HOME}/.local/bin") -eq 0 ]; then
@@ -34,11 +35,11 @@ export PROFILE=${HOME}/.profile
 	fi
 ###########################################################################################################################
 GTFOPKG=(
-	"account-plugin-facebook" "account-plugin-flickr" "account-plugin-google"
- 	"google-chrome-stable" "chromium-browser" "gnome-disk-utility" "rhythmbox"
+	"account-plugin-facebook" "account-plugin-flickr" "account-plugin-google" #Social media can go f@#k a duck.
+ 	"google-chrome-stable" "chromium-browser" #Why do I need Chrome and Chromium on the same system? I *DON'T*. That's why.
 	"gnome-mahjongg" "gnome-mines" "gnome-software" "gnome-sudoku" "aisleriot"
-	"gwakeonlan" "libreoffice-common" "onboard" "totem" "ubuntu-software" "shotwell"
-	"vino" "wakeonlan" "gallery-app" "webbrowser-app"
+	"gwakeonlan" "libreoffice-common" "onboard" "totem" "ubuntu-software" "shotwell" #Games? Who's got time for that sh!t?
+	"vino" "wakeonlan" "gallery-app" "webbrowser-app" #All this sh!t can GTFO too.
 	"unity-scope-calculator" "unity-scope-chromiumbookmarks" "unity-scope-colourlovers"
 	"unity-scope-devhelp" "unity-scope-gdrive" "unity-scope-manpages" "unity-scope-openclipart"
 	"unity-scope-texdoc" "unity-scope-tomboy" "unity-scope-video-remote" "unity-scope-virtualbox"
@@ -46,7 +47,7 @@ GTFOPKG=(
 	"unity-scope-audacious"	"unity-scope-clementine" "unity-scope-firefoxbookmarks"
 	"unity-scope-gmusicbrowser" "unity-scope-gourmet" "unity-scope-musicstores" "unity-scope-musique"
 	"unity-lens-music" "unity-lens-photos" "unity-lens-video" "unity-control-center-signon"
-	"xterm" "ux-term" "dell-super-key" "gnome-user-share" "gnome-calendar"
+	"xterm" "ux-term" "dell-super-key" "gnome-user-share" "gnome-calendar" "gnome-disk-utility" 
 	)
 for PKG in "${GTFOPKG[@]}" ; do
 	if [ ! $(dpkg-query -W -f='${Status}' $PKG 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
