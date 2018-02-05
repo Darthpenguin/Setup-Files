@@ -89,7 +89,7 @@ done
 NODSPLY=(
 	"checkbox-converged.desktop" "dell-driver-installer.desktop" "dell-recovery-media.desktop"
 	"display-im6.desktop" "itweb-settings.desktop" "nm-connection-editor.desktop" "openjdk-8-policytool.desktop" 
-	"logout.desktop" "reboot.desktop" "shutdown.desktop" #look, in the top right corner. Do you see the power menu? DO YOU!? Why in God's name are these in the applications menu? WHY!?
+	"logout.desktop" "reboot.desktop" "shutdown.desktop" #Look, in the top right corner. Do you see the power menu? DO YOU!? Why in God's name are these in the applications menu? WHY!?
 	"unity-user-accounts-panel.desktop" "unity-wacom-panel.desktop" "xdiagnose.desktop"
 	"software-properties-drivers.desktop" "ccsm.desktop" "mpv.desktop" "tilda.desktop"
 	"mailnag-config.desktop" "ccsm.desktop" "unity-credentials-panel.desktop"
