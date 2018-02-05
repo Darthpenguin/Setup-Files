@@ -71,7 +71,7 @@ done
 ######################################################################################################
 if [ $(dpkg-query -W -f='${Status}' "google-chrome-stable" 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	if [ ! -f ${HOME}/Downloads/google-chrome-stable_current_amd64.deb ]; then
-    	wget -P ${HOME}/Downloads --show-progress https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    		wget -P ${HOME}/Downloads --show-progress https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 	fi
 	sudo dpkg -i --force-depends ${HOME}/Downloads/google-chrome-stable_current_amd64.deb
 	rm ${HOME}/Downloads/google-chrome-stable_current_amd64.deb
