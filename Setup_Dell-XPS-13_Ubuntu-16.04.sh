@@ -40,14 +40,15 @@ GTFOPKG=(
 	"gnome-mahjongg" "gnome-mines" "gnome-software" "gnome-sudoku" "aisleriot"
 	"gwakeonlan" "libreoffice-common" "onboard" "totem" "ubuntu-software" "shotwell" #Games? Who's got time for that sh!t?
 	"vino" "wakeonlan" "gallery-app" "webbrowser-app" #All this sh!t can GTFO too.
-	"unity-scope-calculator" "unity-scope-chromiumbookmarks" "unity-scope-colourlovers"
-	"unity-scope-devhelp" "unity-scope-gdrive" "unity-scope-manpages" "unity-scope-openclipart"
-	"unity-scope-texdoc" "unity-scope-tomboy" "unity-scope-video-remote" "unity-scope-virtualbox"
-	"unity-scope-yelp" "unity-scope-zotero"	"unity-webapps-common" "unity-webapps-qml"
-	"unity-scope-audacious"	"unity-scope-clementine" "unity-scope-firefoxbookmarks"
-	"unity-scope-gmusicbrowser" "unity-scope-gourmet" "unity-scope-musicstores" "unity-scope-musique"
-	"unity-lens-music" "unity-lens-photos" "unity-lens-video" "unity-control-center-signon"
-	"xterm" "ux-term" "dell-super-key" "gnome-user-share" "gnome-calendar" "gnome-disk-utility" 
+	"unity-scope-calculator" "unity-scope-chromiumbookmarks" "unity-scope-colourlovers" 		   #I just want an app launcher 
+	"unity-scope-devhelp" "unity-scope-gdrive" "unity-scope-manpages" "unity-scope-openclipart"        #I don't want to search my files
+	"unity-scope-texdoc" "unity-scope-tomboy" "unity-scope-video-remote" "unity-scope-virtualbox"      #I dont't want to search online
+	"unity-scope-yelp" "unity-scope-zotero"	"unity-webapps-common" "unity-webapps-qml"		   #I don't want to install apps from the store
+	"unity-scope-audacious"	"unity-scope-clementine" "unity-scope-firefoxbookmarks"                    #I don't want to play music
+	"unity-scope-gmusicbrowser" "unity-scope-gourmet" "unity-scope-musicstores" "unity-scope-musique"  #Or whateverthefuck all this does
+	"unity-lens-music" "unity-lens-photos" "unity-lens-video" 					   #It can all GTFO.
+	"unity-control-center-signon" #unity-control-center-signon is the sum'bitch that shows as 'online accounts' in the system settings. Gotcha motherfucker.
+	"xterm" "dell-super-key" "gnome-user-share" "gnome-calendar" "gnome-disk-utility" #F@#k all these packages.
 	)
 for PKG in "${GTFOPKG[@]}" ; do
 	if [ ! $(dpkg-query -W -f='${Status}' $PKG 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
