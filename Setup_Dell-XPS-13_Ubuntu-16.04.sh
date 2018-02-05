@@ -83,7 +83,7 @@ NODSPLY=(
 	"openjdk-8-policytool.desktop" "logout.desktop" "reboot.desktop" "shutdown.desktop"
 	"unity-user-accounts-panel.desktop" "unity-wacom-panel.desktop" "xdiagnose.desktop"
 	"software-properties-drivers.desktop" "ccsm.desktop" "mpv.desktop" "tilda.desktop"
-	"mailnag-config.desktop" "ccsm.desktop"
+	"mailnag-config.desktop" "ccsm.desktop" "unity-credentials-panel.desktop"
 	)
 for i in "${NODSPLY[@]}"; do 
 if [ -f /usr/share/applications/$i ] && [ ! -f ${HOME}/.local/share/applications/$i ]; then 
