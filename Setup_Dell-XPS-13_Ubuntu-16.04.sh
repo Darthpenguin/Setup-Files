@@ -45,7 +45,7 @@ GTFOPKG=(
 	"unity-scope-yelp" "unity-scope-zotero"	"unity-webapps-common" "unity-webapps-qml"
 	"unity-scope-audacious"	"unity-scope-clementine" "unity-scope-firefoxbookmarks"
 	"unity-scope-gmusicbrowser" "unity-scope-gourmet" "unity-scope-musicstores" "unity-scope-musique"
-	"unity-lens-music" "unity-lens-photos" "unity-lens-video"
+	"unity-lens-music" "unity-lens-photos" "unity-lens-video" "unity-control-center-signon"
 	"xterm" "ux-term" "dell-super-key" "gnome-user-share" "gnome-calendar"
 	)
 for PKG in "${GTFOPKG[@]}" ; do
