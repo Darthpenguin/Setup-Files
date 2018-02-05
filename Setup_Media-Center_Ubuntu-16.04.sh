@@ -89,8 +89,8 @@ for PKG in "${INSTALL[@]}" ; do
 done
 #######################################################################################################
 NODSPLY=(
-	      "checkbox-converged.desktop" "dell-driver-installer.desktop" "dell-recovery-media.desktop"
-	      "display-im6.desktop" "openjdk-8-java.desktop"
+	"checkbox-converged.desktop" "dell-driver-installer.desktop" "dell-recovery-media.desktop"
+	"display-im6.desktop" "openjdk-8-java.desktop"
       	"openjdk-8-policytool.desktop" "logout.desktop" "reboot.desktop" "shutdown.desktop"
       	"unity-user-accounts-panel.desktop" "unity-wacom-panel.desktop" "xdiagnose.desktop"
       	"software-properties-drivers.desktop" "ccsm.desktop" "mpv.desktop" "tilda.desktop"
@@ -113,9 +113,7 @@ fi
 #######################################################################################################
 if [ -f ${HOME}/examples.desktop ]; then rm -v ${HOME}/examples.desktop 2>/dev/null; fi
 #######################################################################################################
-gsettings set com.canonical.indicator.appmenu menu-mode "global"
 gsettings set org.gnome.desktop.interface gtk-theme "Numix"
 gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
-gsettings set org.gnome.desktop.wm.preferences theme "Numix"
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
 gsettings set com.canonical.Unity.Launcher favorites "['application://org.gnome.Nautilus.desktop', 'application://google-chrome.desktop', 'application://gedit.desktop', 'application://kodi.desktop', 'application://gnome-terminal.desktop', 'application://unity-control-center.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']"
