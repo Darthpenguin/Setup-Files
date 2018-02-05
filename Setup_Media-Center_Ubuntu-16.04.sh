@@ -46,10 +46,9 @@ GTFOPKG=(
       	"unity-scope-devhelp" "unity-scope-gdrive" "unity-scope-manpages" "unity-scope-openclipart"
       	"unity-scope-texdoc" "unity-scope-tomboy" "unity-scope-video-remote" "unity-scope-virtualbox"
       	"unity-scope-yelp" "unity-scope-zotero"	"unity-webapps-common" "unity-webapps-qml"
-         "unity-scope-audacious"	"unity-scope-clementine" "unity-scope-firefoxbookmarks"
+         "unity-scope-audacious" "unity-scope-clementine" "unity-scope-firefoxbookmarks"
          "unity-scope-gmusicbrowser" "unity-scope-gourmet" "unity-scope-musicstores" "unity-scope-musique"
-         "unity-lens-music" "unity-lens-photos" "unity-lens-video"
-         "xterm" "ux-term"
+         "unity-lens-music" "unity-lens-photos" "unity-lens-video" "xterm"
          )
 for PKG in "${GTFOPKG[@]}" ; do
 	if [ ! $(dpkg-query -W -f='${Status}' $PKG 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
