@@ -69,7 +69,7 @@ fi
 ###########################################################################################################################
 INSTALL=(
 	"numix-gtk-theme" "numix-icon-theme-circle" "ubuntu-restricted-extras" "gnome-mpv" "handbrake"
-	"handbrake-cli" "gparted" "tilda" "firefox" "mailnag" "mailnag-unity-plugin"
+	"handbrake-cli" "gparted" "tilda" "firefox" "mailnag" "mailnag-unity-plugin" "compizconfig-settings-manager"
 	)
 for PKG in "${INSTALL[@]}" ; do
 	if [ $(dpkg-query -W -f='${Status}' $PKG 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
@@ -83,7 +83,7 @@ NODSPLY=(
 	"openjdk-8-policytool.desktop" "logout.desktop" "reboot.desktop" "shutdown.desktop"
 	"unity-user-accounts-panel.desktop" "unity-wacom-panel.desktop" "xdiagnose.desktop"
 	"software-properties-drivers.desktop" "ccsm.desktop" "mpv.desktop" "tilda.desktop"
-	"mailnag-config.desktop"
+	"mailnag-config.desktop" "ccsm.desktop"
 	)
 for i in "${NODSPLY[@]}"; do 
 if [ -f /usr/share/applications/$i ] && [ ! -f ${HOME}/.local/share/applications/$i ]; then 
