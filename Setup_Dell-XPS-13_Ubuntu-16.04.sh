@@ -37,8 +37,8 @@ export PROFILE=${HOME}/.profile
 GTFOPKG=(
 	"account-plugin-facebook" "account-plugin-flickr" "account-plugin-google" #Social media can go f@#k a duck.
  	"google-chrome-stable" "chromium-browser" #Why do I need Chrome and Chromium on the same system? I *DON'T*. That's why.
-	"gnome-mahjongg" "gnome-mines" "gnome-software" "gnome-sudoku" "aisleriot"
-	"gwakeonlan" "libreoffice-common" "onboard" "totem" "ubuntu-software" "shotwell" #Games? Who's got time for that sh!t?
+	"gnome-mahjongg" "gnome-mines" "gnome-software" "gnome-sudoku" "aisleriot" #Games? Who's got time for that sh!t?
+	"gwakeonlan" "libreoffice-common" "onboard" "totem" "ubuntu-software" "shotwell" 
 	"vino" "wakeonlan" "gallery-app" "webbrowser-app" #All this sh!t can GTFO too.
 	"unity-scope-calculator" "unity-scope-chromiumbookmarks" "unity-scope-colourlovers" 		   #I just want an app launcher 
 	"unity-scope-devhelp" "unity-scope-gdrive" "unity-scope-manpages" "unity-scope-openclipart"        #I don't want to search my files
@@ -55,34 +55,41 @@ for PKG in "${GTFOPKG[@]}" ; do
 		sudo apt purge -y --auto-remove $PKG
 	fi
 done
+# I wonder if I could just use "sudo apt purge -y autoremove "${GTFOPKG[@]}" instead of that for loop. meh.
 ###########################################################################################################################
+# Just making damn sure everything is updated and all cruft is gone.
 sudo apt update
 sudo apt -f install -y
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
 sudo apt autoremove -y
 ###########################################################################################################################
+#Add numix ppa. Ima use it later.
 if ! grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep -q numix ; then
 	sudo add-apt-repository -u --yes ppa:numix/ppa
 fi
+#Need mailnag.
 if ! grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep -q mailnag ; then
 	sudo add-apt-repository -u --yes ppa:pulb/mailnag
 fi
 ###########################################################################################################################
 INSTALL=(
-	"numix-gtk-theme" "numix-icon-theme-circle" "ubuntu-restricted-extras" "gnome-mpv" "handbrake"
-	"handbrake-cli" "gparted" "tilda" "firefox" "mailnag" "mailnag-unity-plugin" "compizconfig-settings-manager"
+	"numix-gtk-theme" "numix-icon-theme-circle" #Need this to replace shitty default theme.
+	"ubuntu-restricted-extras" "gnome-mpv" #Video stuff. Also let's me play mp3s methinks. Why I can play mp3s outta box? dunno.
+	"handbrake-cli" "handbrake" #handbrake is good program. mostly just use cli version. Not sure I need gui... meh.
+	"gparted" "tilda" "firefox" "mailnag" "mailnag-unity-plugin" "compizconfig-settings-manager" #Install all these things!
 	)
 for PKG in "${INSTALL[@]}" ; do
 	if [ $(dpkg-query -W -f='${Status}' $PKG 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 		sudo apt install -y $PKG 2>/dev/null
 	fi
 done
+#Again with the for loop.. overly complicated?
 ###########################################################################################################################
 NODSPLY=(
 	"checkbox-converged.desktop" "dell-driver-installer.desktop" "dell-recovery-media.desktop"
-	"display-im6.desktop" "display-im6.q16.desktop" "itweb-settings.desktop" "nm-connection-editor.desktop"
-	"openjdk-8-policytool.desktop" "logout.desktop" "reboot.desktop" "shutdown.desktop"
+	"display-im6.desktop" "itweb-settings.desktop" "nm-connection-editor.desktop" "openjdk-8-policytool.desktop" 
+	"logout.desktop" "reboot.desktop" "shutdown.desktop" #look, in the top right corner. Do you see the power menu? DO YOU!? Why in God's name are these in the applications menu? WHY!?
 	"unity-user-accounts-panel.desktop" "unity-wacom-panel.desktop" "xdiagnose.desktop"
 	"software-properties-drivers.desktop" "ccsm.desktop" "mpv.desktop" "tilda.desktop"
 	"mailnag-config.desktop" "ccsm.desktop" "unity-credentials-panel.desktop"
@@ -109,7 +116,9 @@ fi
 if [ -f /usr/share/gconf/defaults/40_oem-superkey-workaround ]; then
 	sudo rm -rf /usr/share/gconf/defaults/40_oem-superkey-workaround
 fi
+#Superkey no worky on Dell-XPS13. Need to remove this and make change in ccsm. Can I do it programatically? hmmm.
 #################################################################################################################################
+#If Chrome is gone, and is should be, get rid of these other files. This is called the Dead Horse Beater subroutine.
 if [ $(dpkg-query -W -f='${Status}' google-chrome-stable 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	rm -v ${HOME}/.gnome/apps/chrome-*-Default.desktop 2>/dev/null
 	rm -v ${HOME}/.config/google-chrome/chrome_shutdown_ms.txt 2>/dev/null 
@@ -118,13 +127,15 @@ if [ $(dpkg-query -W -f='${Status}' google-chrome-stable 2>/dev/null | grep -c "
 	rm -v ${HOME}/.local/share/applications/chrome-*-Default.desktop 2>/dev/null  
 fi
 ###########################################################################################################################
+#Coding 101. Lesson 1. This is how you delete examples, for example.
 if [ -f ${HOME}/examples.desktop ]; then rm -v ${HOME}/examples.desktop 2>/dev/null; fi
 ###########################################################################################################################
-gsettings set org.gnome.desktop.interface gtk-theme "Numix"
-gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
-gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
+gsettings set org.gnome.desktop.interface gtk-theme "Numix" #Things look better now. I'm happy.
+gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle" #Even better still.
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true #Why is this not default behaviour?
 gsettings set com.canonical.Unity.Launcher favorites "['application://org.gnome.Nautilus.desktop', 'application://firefox.desktop', 'application://thunderbird.desktop', 'application://gedit.desktop', 'application://gnome-terminal.desktop', 'application://unity-control-center.desktop', 'unity://running-apps', 'unity://expo-icon', 'unity://devices']"
 ###########################################################################################################################
+#Allow system to hibernate
 if [ ! -f /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla ]; then
 sudo bash -c "/bin/cat << EOF > /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
 [Re-enable hibernate by default in upower]
@@ -137,4 +148,6 @@ Action=org.freedesktop.login1.hibernate;org.freedesktop.login1.handle-hibernate-
 ResultActive=yes
 EOF"
 fi
+###########################################################################################################################
+echo "reboot system when done."
 ###########################################################################################################################
