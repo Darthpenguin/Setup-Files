@@ -103,9 +103,6 @@ if [ -f /usr/share/applications/gnome-mpv.desktop ] && [ ! -f ${HOME}/.local/sha
 	cp -v /usr/share/applications/gnome-mpv.desktop ${HOME}/.local/share/applications/gnome-mpv.desktop
 	sed -i -e 's/Icon=gnome-mpv/Icon=totem/g' ${HOME}/.local/share/applications/gnome-mpv.desktop
 fi
-if [ -f ${HOME}/.local/share/applications/unity-accounts-panel.desktop ]; then
-	sed -i -e 's/X-Unity-Settings-Panel=user-accounts//g' ${HOME}/.local/share/applications/unity-accounts-panel.desktop
-fi
 #################################################################################################################################
 if [ -f /usr/share/gconf/defaults/40_oem-superkey-workaround ]; then
 	sudo rm -rf /usr/share/gconf/defaults/40_oem-superkey-workaround
