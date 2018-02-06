@@ -4,6 +4,7 @@
 if [ ! -f ${HOME}/.bash_aliases ]; then
 	touch ${HOME}/.bash_aliases
 	ALIASES=(
+		"alias cls='clear'" #Clear the screen
 		"alias sudo='sudo '" #Because sudo doesn't accept my aliases with out this. I don't know why.
 		"alias cp='cp -i -r -u -v'" #Because I always want verbosity. We all want verbosity damint!
 		"alias copy='cp -i -r -u -v'" #Because sometimes I type 'copy'.
