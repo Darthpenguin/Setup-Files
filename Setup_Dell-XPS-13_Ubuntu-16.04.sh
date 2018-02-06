@@ -15,7 +15,7 @@ if [ ! -f ${HOME}/.bash_aliases ]; then
 		"alias mv='mv -i -u -v'" #Cool, a movie program. No, wait... it's short for *move*. ... F@#k.
 		"alias move='mv -i -u -v'" #There! Now it's not f@#k!ng ambiguious.
 		"alias mkdir='mkdir -p'" #*Never* do I *not* want to do this.
-		'alias rename='rename -v'" #No verbosity is an atrocity.
+		"alias rename='rename -v'" #No verbosity is an atrocity.
 		"alias df='df -h /'" #Whats all that other sh!t that df prints? All I want is the disk usage of my drive.
 		"alias grep='grep -i'" #Because screw you and your case sensitivity.
 		"alias ls='ls -h --color=always'" #Yes I want it to be human readable. I'm not a F@#k!ng machine.
