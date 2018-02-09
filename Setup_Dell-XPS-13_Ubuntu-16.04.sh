@@ -111,9 +111,12 @@ if [ -f /usr/share/applications/thunderbird.desktop ] && [ ! -f ${HOME}/.local/s
 	cp -v /usr/share/applications/thunderbird.desktop ${HOME}/.local/share/applications/thunderbird.desktop
 	sed -i -e 's/Icon=thunderbird/Icon=thunderbird-branded/g' ${HOME}/.local/share/applications/thunderbird.desktop
 fi
-if [ -f /usr/share/applications/gnome-mpv.desktop ] && [ ! -f ${HOME}/.local/share/applications/gnome-mpv.desktop ]; then
-	cp -v /usr/share/applications/gnome-mpv.desktop ${HOME}/.local/share/applications/gnome-mpv.desktop
-	sed -i -e 's/Icon=gnome-mpv/Icon=totem/g' ${HOME}/.local/share/applications/gnome-mpv.desktop
+export SYSMPV=/usr/share/applications/gnome-mpv.desktop
+export MPV=${HOME}/.local/share/applications/gnome-mpv.desktop
+if [ -f $SYSMPV ] && [ ! -f $MPV ]; then
+	cp -v $SYSMPV $MPV
+	sed -i -e 's/Icon=gnome-mpv/Icon=totem/g' $MPV
+	sed -i -e 's/GNOME MPV/Media Player/g' $MPV
 fi
 #################################################################################################################################
 if [ -f /usr/share/gconf/defaults/40_oem-superkey-workaround ]; then
@@ -121,7 +124,7 @@ if [ -f /usr/share/gconf/defaults/40_oem-superkey-workaround ]; then
 fi
 #Superkey no worky on Dell-XPS13. Need to remove this and make change in ccsm. Can I do it programatically? hmmm.
 #################################################################################################################################
-#If Chrome is gone, and is should be, get rid of these other files. This is called the Dead Horse Beater subroutine.
+#If Chrome is gone (and is should be) get rid of these other files. This is called the Dead Horse Beater subroutine.
 if [ $(dpkg-query -W -f='${Status}' google-chrome-stable 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	rm -v ${HOME}/.gnome/apps/chrome-*-Default.desktop 2>/dev/null
 	rm -v ${HOME}/.config/google-chrome/chrome_shutdown_ms.txt 2>/dev/null 
