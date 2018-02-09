@@ -1,8 +1,9 @@
 ###########################################################################################################################
 #!/bin/bash
 ###########################################################################################################################
-if [ ! -f ${HOME}/.bash_aliases ]; then
-	touch ${HOME}/.bash_aliases
+export ALSFL=${HOME}/.bash_aliases
+if [ ! -f $ALSFL ]; then
+	touch $ALSFL
 	ALIASES=(
 		"alias cls='clear'" #Clear the screen
 		"alias sudo='sudo '" #Because sudo doesn't accept my aliases with out this. I don't know why.
@@ -23,35 +24,37 @@ if [ ! -f ${HOME}/.bash_aliases ]; then
 		"alias logoff='gnome-session-quit --logout --no-prompt'" #Because sometimes you just need to rage-quit.
 		)
 	for i in "${ALIASES[@]}" ; do
-		if [ $(cat ${HOME}/.bash_aliases 2>/dev/null | grep -c "$i") -eq 0 ]; then
-			echo $i >> ${HOME}/.bash_aliases #Err.. is that going to echo the above comments into the file? I dunno.
+		if [ $(cat $ALSFL 2>/dev/null | grep -c "$i") -eq 0 ]; then
+			echo $i >> $ALSFL #Err.. is that going to echo the above comments into the file? I dunno.
 		fi
 	done
 fi
 ###########################################################################################################################
 # All this sh!t does is make a .local/bin directory and add it to the $PATH
-if [ ! -d ${HOME}/.local/bin ]; then mkdir ${HOME}/.local/bin; fi
+export NWPTH=${HOME}/.local/bin
+if [ ! -d $NWPTH ]; then mkdir $NWPTH; fi
 export PROFILE=${HOME}/.profile
-	if [ $(cat $PROFILE 2>/dev/null | grep -c "PATH=$PATH:${HOME}/.local/bin") -eq 0 ]; then
-		echo "PATH=$PATH:${HOME}/.local/bin" >> $PROFILE
+	if [ $(cat $PROFILE 2>/dev/null | grep -c "PATH=$PATH:$NWPTH") -eq 0 ]; then
+		echo "PATH=$PATH:$NWPTH" >> $PROFILE
 		echo "export PATH" >> $PROFILE
 	fi
 ###########################################################################################################################
 GTFOPKG=(
-	"account-plugin-facebook" "account-plugin-flickr" "account-plugin-google" #Social media can go f@#k a duck.
- 	"google-chrome-stable" "chromium-browser" #Why do I need Chrome and Chromium on the same system? I *DON'T*. That's why.
-	"gnome-mahjongg" "gnome-mines" "gnome-software" "gnome-sudoku" "aisleriot" #Games? Who's got time for that sh!t?
-	"gwakeonlan" "libreoffice-common" "onboard" "totem" "ubuntu-software" "shotwell" 
-	"vino" "wakeonlan" "gallery-app" "webbrowser-app" #All this sh!t can GTFO too.
-	"unity-scope-calculator" "unity-scope-chromiumbookmarks" "unity-scope-colourlovers" 		   #I just want an app launcher 
-	"unity-scope-devhelp" "unity-scope-gdrive" "unity-scope-manpages" "unity-scope-openclipart"        #I don't want to search my files
-	"unity-scope-texdoc" "unity-scope-tomboy" "unity-scope-video-remote" "unity-scope-virtualbox"      #I dont't want to search online
-	"unity-scope-yelp" "unity-scope-zotero"	"unity-webapps-common" "unity-webapps-qml"		   #I don't want to install apps from the store
-	"unity-scope-audacious"	"unity-scope-clementine" "unity-scope-firefoxbookmarks"                    #I don't want to play music
-	"unity-scope-gmusicbrowser" "unity-scope-gourmet" "unity-scope-musicstores" "unity-scope-musique"  #Or whateverthefuck all this does
-	"unity-lens-music" "unity-lens-photos" "unity-lens-video" 					   #It can all GTFO.
-	"unity-control-center-signon" #unity-control-center-signon is the sum'bitch that shows as 'online accounts' in the system settings. Gotcha motherfucker.
-	"xterm" "dell-super-key" "gnome-user-share" "gnome-calendar" "gnome-disk-utility" #F@#k all these packages.
+"account-plugin-facebook" "account-plugin-flickr" "account-plugin-google" #Social media can go f@#k a duck.
+"google-chrome-stable" "chromium-browser" #Why do I need Chrome and Chromium on the same system? I *DON'T*. That's why.
+"gnome-mahjongg" "gnome-mines" "gnome-software" "gnome-sudoku" "aisleriot"            #Games? Who's got time for that sh!t?
+"gwakeonlan" "libreoffice-common" "onboard" "totem" "ubuntu-software" "shotwell" 
+"vino" "wakeonlan" "gallery-app" "webbrowser-app"                                     #All this sh!t can GTFO too.
+"unity-scope-calculator" "unity-scope-chromiumbookmarks" "unity-scope-colourlovers"   #I just want an app launcher 
+"unity-scope-devhelp" "unity-scope-gdrive" "unity-scope-manpages"                     #I don't want to search my files
+"unity-scope-openclipart" "unity-scope-texdoc" "unity-scope-tomboy"                   #I dont't want to search online
+"unity-scope-video-remote" "unity-scope-virtualbox"                                   #I don't want to install apps from the store
+"unity-scope-yelp" "unity-scope-zotero"	"unity-webapps-common" "unity-webapps-qml"    #I don't want to play music	  
+"unity-scope-audacious"	"unity-scope-clementine" "unity-scope-firefoxbookmarks"       #Or whateverthefuck all this does             
+"unity-scope-gmusicbrowser" "unity-scope-gourmet" "unity-scope-musicstores"           #It can all GTFO.
+"unity-scope-musique" "unity-lens-music" "unity-lens-photos" "unity-lens-video"
+"unity-control-center-signon" #unity-control-center-signon is the sum'bitch that shows as 'online accounts' in the system settings. Gotcha motherfucker.
+"xterm" "dell-super-key" "gnome-user-share" "gnome-calendar" "gnome-disk-utility" #F@#k all these packages.
 	)
 for PKG in "${GTFOPKG[@]}" ; do
 	if [ ! $(dpkg-query -W -f='${Status}' $PKG 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
