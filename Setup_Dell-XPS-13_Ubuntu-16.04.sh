@@ -1,13 +1,19 @@
-###########################################################################################################################
+#################################################################################################################################
 #!/bin/bash
-###########################################################################################################################
+#################################################################################################################################
+if [ $(lsb_release -a | grep -c "Ubuntu 16.04") -eq 0 ]; then
+	echo "Warning: This does not seem to be Ubuntu 16.04 LTS. Canceling."
+	read -n 1 -s -r -p "Press any key to continue"
+	exit
+fi
+#################################################################################################################################
 profile=$(gsettings get org.gnome.Terminal.ProfilesList default)
 profile=${profile:1:-1}
 gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$profile/" use-transparent-background true
 gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$profile/" background-transparency-percent 10
 gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$profile/" cursor-shape ibeam
 gsettings set "org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$profile/" scrollbar-policy never
-###########################################################################################################################
+#################################################################################################################################
 export ALSFL=${HOME}/.bash_aliases
 if [ ! -f $ALSFL ]; then
 	touch $ALSFL
@@ -57,7 +63,7 @@ if [ ! -f $ALSFL ]; then
 		fi
 	done
 fi
-###########################################################################################################################
+#################################################################################################################################
 GTFOPKG=(
 	"account-plugin-facebook" "account-plugin-flickr" "account-plugin-google"
 	"google-chrome-stable" "chromium-browser"
@@ -75,20 +81,20 @@ for PKG in "${GTFOPKG[@]}" ; do
 		sudo apt purge -y --auto-remove $PKG
 	fi
 done
-###########################################################################################################################
+#################################################################################################################################
 sudo apt update
 sudo apt -f install -y
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
 sudo apt autoremove -y
-###########################################################################################################################
+#################################################################################################################################
 if ! grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep -q numix ; then
 	sudo add-apt-repository -u --yes ppa:numix/ppa
 fi
 if ! grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep -q mailnag ; then
 	sudo add-apt-repository -u --yes ppa:pulb/mailnag
 fi
-###########################################################################################################################
+#################################################################################################################################
 INSTALL=(
 	"numix-gtk-theme" "numix-icon-theme-circle" "ubuntu-restricted-extras" "vlc" "firefox" "mailnag" "mailnag-unity-plugin"
 	)
@@ -97,7 +103,7 @@ for PKG in "${INSTALL[@]}" ; do
 		sudo apt install -y $PKG 2>/dev/null
 	fi
 done
-###########################################################################################################################
+#################################################################################################################################
 NODSPLY=(
 	"checkbox-converged.desktop" "dell-driver-installer.desktop" "dell-recovery-media.desktop"
 	"display-im6.desktop" "itweb-settings.desktop" "nm-connection-editor.desktop" "openjdk-8-policytool.desktop" 
@@ -120,11 +126,11 @@ if [ -f /usr/share/applications/thunderbird.desktop ] && [ ! -f ${HOME}/.local/s
 	cp -v /usr/share/applications/thunderbird.desktop ${HOME}/.local/share/applications/thunderbird.desktop
 	sed -i -e 's/Icon=thunderbird/Icon=thunderbird-branded/g' ${HOME}/.local/share/applications/thunderbird.desktop
 fi
-###########################################################################################
+#################################################################################################################################
 if [ -f /usr/share/gconf/defaults/40_oem-superkey-workaround ]; then
 	sudo rm -rf /usr/share/gconf/defaults/40_oem-superkey-workaround
 fi
-###########################################################################################
+#################################################################################################################################
 if [ $(dpkg-query -W -f='${Status}' google-chrome-stable 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
 	rm -v ${HOME}/.gnome/apps/chrome-*-Default.desktop 2>/dev/null
 	rm -v ${HOME}/.config/google-chrome/chrome_shutdown_ms.txt 2>/dev/null 
@@ -132,9 +138,9 @@ if [ $(dpkg-query -W -f='${Status}' google-chrome-stable 2>/dev/null | grep -c "
 	rm -v ${HOME}/.local/share/icons/hicolor/128x128/apps/chrome-*-Default.png 2>/dev/null 
 	rm -v ${HOME}/.local/share/applications/chrome-*-Default.desktop 2>/dev/null  
 fi
-###########################################################################################################################
+#################################################################################################################################
 if [ -f ${HOME}/examples.desktop ]; then rm -v ${HOME}/examples.desktop 2>/dev/null; fi
-###########################################################################################################################
+#################################################################################################################################
 gsettings set org.gnome.desktop.interface gtk-theme "Numix"
 gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
@@ -151,6 +157,6 @@ Action=org.freedesktop.login1.hibernate;org.freedesktop.login1.handle-hibernate-
 ResultActive=yes
 EOF"
 fi
-###########################################################################################################################
+#################################################################################################################################
 echo "reboot system when done."
-###########################################################################################################################
+#################################################################################################################################
