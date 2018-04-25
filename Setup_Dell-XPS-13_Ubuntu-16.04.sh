@@ -74,7 +74,7 @@ GTFOPKG=(
 	"unity-scope-openclipart" "unity-scope-texdoc" "unity-scope-tomboy" "unity-scope-video-remote" "unity-scope-virtualbox" "unity-scope-yelp" "unity-scope-zotero"
 	"unity-webapps-common" "unity-webapps-qml" "unity-scope-audacious" "unity-scope-clementine" "unity-scope-firefoxbookmarks" "unity-scope-gmusicbrowser" "unity-scope-gourmet"
 	"unity-scope-musicstores" "unity-scope-musique" "unity-lens-music" "unity-lens-photos" "unity-lens-video" "unity-control-center-signon"
-	"xterm" "dell-super-key" "gnome-calendar" "dell-super-key"
+	"xterm" "dell-super-key" "gnome-calendar" "dell-super-key" "flashplugin-installer"
 	)
 for PKG in "${GTFOPKG[@]}" ; do
 	if [ ! $(dpkg-query -W -f='${Status}' $PKG 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
@@ -88,10 +88,10 @@ sudo apt upgrade -y
 sudo apt dist-upgrade -y
 sudo apt autoremove -y
 #################################################################################################################################
-if ! grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep -q numix ; then
+if [ $(ls /etc/apt/sources.list.d/ | grep "numix-ubuntu-ppa-xenial") -eq 0 ]; then
 	sudo add-apt-repository -u --yes ppa:numix/ppa
 fi
-if ! grep ^ /etc/apt/sources.list /etc/apt/sources.list.d/* | grep -q mailnag ; then
+if [ $(ls /etc/apt/sources.list.d/ | grep "pulb-ubuntu-mailnag-xenial") -eq 0 ]; then
 	sudo add-apt-repository -u --yes ppa:pulb/mailnag
 fi
 #################################################################################################################################
@@ -144,7 +144,7 @@ if [ -f ${HOME}/examples.desktop ]; then rm -v ${HOME}/examples.desktop 2>/dev/n
 gsettings set org.gnome.desktop.interface gtk-theme "Numix"
 gsettings set org.gnome.desktop.interface icon-theme "Numix-Circle"
 gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
-###########################################################################################################################
+#################################################################################################################################
 if [ ! -f /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla ]; then
 sudo bash -c "/bin/cat << EOF > /etc/polkit-1/localauthority/50-local.d/com.ubuntu.enable-hibernate.pkla
 [Re-enable hibernate by default in upower]
@@ -157,6 +157,8 @@ Action=org.freedesktop.login1.hibernate;org.freedesktop.login1.handle-hibernate-
 ResultActive=yes
 EOF"
 fi
+#################################################################################################################################
+sudo bash -c "sed -e '58,65d' /usr/share/unity/scopes/applications.scope"
 #################################################################################################################################
 echo "reboot system when done."
 #################################################################################################################################
