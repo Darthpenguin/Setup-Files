@@ -1,6 +1,8 @@
 #################################################################################################################################
 #!/bin/bash
 #################################################################################################################################
+sudo apt install lsb-core
+#################################################################################################################################
 if [ $(lsb_release -a | grep -c "Ubuntu 16.04") -eq 0 ]; then
 	echo "Warning: This does not seem to be Ubuntu 16.04 LTS. Canceling."
 	read -n 1 -s -r -p "Press any key to continue"
@@ -88,15 +90,15 @@ sudo apt upgrade -y
 sudo apt dist-upgrade -y
 sudo apt autoremove -y
 #################################################################################################################################
-if [ $(ls /etc/apt/sources.list.d/ | grep "numix-ubuntu-ppa-xenial") -eq 0 ]; then
+if [[ $(ls /etc/apt/sources.list.d/ | grep "numix-ubuntu-ppa-xenial") -eq 0 ]]; then
 	sudo add-apt-repository -u --yes ppa:numix/ppa
 fi
-if [ $(ls /etc/apt/sources.list.d/ | grep "pulb-ubuntu-mailnag-xenial") -eq 0 ]; then
+if [[ $(ls /etc/apt/sources.list.d/ | grep "pulb-ubuntu-mailnag-xenial") -eq 0 ]]; then
 	sudo add-apt-repository -u --yes ppa:pulb/mailnag
 fi
 #################################################################################################################################
 INSTALL=(
-	"numix-gtk-theme" "numix-icon-theme-circle" "ubuntu-restricted-extras" "vlc" "firefox" "mailnag" "mailnag-unity-plugin"
+	"numix-gtk-theme" "numix-icon-theme-circle" "vlc" "firefox" "mailnag" "mailnag-unity-plugin"
 	)
 for PKG in "${INSTALL[@]}" ; do
 	if [ $(dpkg-query -W -f='${Status}' $PKG 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
@@ -157,8 +159,6 @@ Action=org.freedesktop.login1.hibernate;org.freedesktop.login1.handle-hibernate-
 ResultActive=yes
 EOF"
 fi
-#################################################################################################################################
-sudo bash -c "sed -e '58,65d' /usr/share/unity/scopes/applications.scope"
 #################################################################################################################################
 echo "reboot system when done."
 #################################################################################################################################
