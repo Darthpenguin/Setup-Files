@@ -98,7 +98,7 @@ if [[ $(ls /etc/apt/sources.list.d/ | grep "pulb-ubuntu-mailnag-xenial") -eq 0 ]
 fi
 #################################################################################################################################
 INSTALL=(
-	"numix-gtk-theme" "numix-icon-theme-circle" "vlc" "firefox" "mailnag" "mailnag-unity-plugin"
+	"numix-gtk-theme" "numix-icon-theme-circle" "vlc" "firefox" "mailnag" "mailnag-unity-plugin" "xdotool"
 	)
 for PKG in "${INSTALL[@]}" ; do
 	if [ $(dpkg-query -W -f='${Status}' $PKG 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
@@ -159,6 +159,9 @@ Action=org.freedesktop.login1.hibernate;org.freedesktop.login1.handle-hibernate-
 ResultActive=yes
 EOF"
 fi
+#################################################################################################################################
+gsettings set com.canonical.Unity.Lenses disabled-scopes "['calendar.scope', 'music.scope', 'graphics.scope', 'more_suggestions.scope', 'video.scope', 'code.scope', 'files-local.scope', 'info.scope', 'boxes.scope', 'news.scope', 'reference.scope', 'help.scope', 'books.scope', 'photos.scope', 'notes.scope', 'recipes.scope', 'commands.scope', 'weather.scope', 'searchin.scope', 'files.scope', 'web.scope']"
+gsettings set com.canonical.Unity.Dash scopes "['applications.scope']"
 #################################################################################################################################
 echo "reboot system when done."
 #################################################################################################################################
