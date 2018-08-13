@@ -16,15 +16,13 @@ hwclock --systohc
 cp /etc/locale.gen /etc/locale.gen.orig ; echo en_US.UTF-8 UTF-8 > /etc/locale.gen ; locale-gen
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 echo Dell-XPS-13 > /etc/hostname
-## !!!! Add 'resume' hook just before fsck in /etc/mkinitcpio.conf !!!! ###
+
+sed -i '/HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)/c\HOOKS=(base udev autodetect modconf block filesystems resume fsck)' /etc/mkinitcpio.conf
 mkinitcpio -p linux
-## Set root password
-passwd
-## Grub ##
-## edit /etc/defaults/grub ##
-## set the line as: GRUB_CMDLINE_LINUX_DEFAULT="resume=/dev/sda2" ##
-## remove 'splash' and 'quiet'
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux ; grub-mkconfig -o /boot/grub/grub.cfg
+passwd ## Set root password
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ArchLinux
+sed -i '/GRUB_CMDLINE_LINUX_DEFAULT="quiet"/c\GRUB_CMDLINE_LINUX_DEFAULT="resume=/dev/sda2"' /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
 exit
 ### EXIT CHROOT ENVIRONMENT ###
 umount -R /mnt
@@ -41,6 +39,7 @@ EDITOR=nano visudo #uncomment section to allow wheel group sudo access
 su $USER
 sudo pacman -Syyu --noconfirm
 sudo pacman -S xdg-user-dirs xdg-user-dirs-gtk --noconfirm ; xdg-user-dirs-gtk-update ; xdg-user-dirs-update
+sudo pacman -S gnome
 sudo pacman -S arc-solid-gtk-theme arc-gtk-theme --noconfirm
 sudo pacman -S atom mailnag --noconfirm
 sudo pacman -S networkmanager networkmanager-openconnect networkmanager-openvpn networkmanager-pptp --noconfirm
