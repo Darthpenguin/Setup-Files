@@ -6,7 +6,15 @@
 timedatectl set-ntp true
 mkfs.fat -F32 /dev/sda1 ; mkswap /dev/sda2 ; swapon /dev/sda2 ; mkfs.ext4 /dev/sda3 ; mkfs.ext4 /dev/sda4
 mount /dev/sda3 /mnt ; mkdir /mnt/{home,boot} ; mount /dev/sda1 /mnt/boot ; mount /dev/sda4 /mnt/home
-pacstrap /mnt base base-devel wifi-menu dialog wpa_supplicant bash bash-completion grub efibootmgr linux-lts linux-lts-headers linux-lts-docs
+
+pacstrap /mnt \
+base base-devel \
+wifi-menu dialog wpa_supplicant \
+bash bash-completion \
+grub efibootmgr \
+linux-lts linux-lts-headers linux-lts-docs \
+/
+
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 
@@ -30,19 +38,28 @@ poweroff
 ### Remove installation media ###
 ### reboot the computer ###
 ## login to root ##
-read -p 'Enter the username for the primary user: ' USER
-useradd -g users -G wheel,video -m -s /bin/bash $USER
-passwd $USER
+## Get connected to the Internet ##
+read -p 'Enter the username for the primary user: ' USER ; useradd -g users -G wheel,video -m -s /bin/bash $USER ; passwd $USER
 EDITOR=nano visudo #uncomment section to allow wheel group sudo access
 
 ### Switch to the new user ###
 su $USER
 sudo pacman -Syyu --noconfirm
-sudo pacman -S xdg-user-dirs xdg-user-dirs-gtk --noconfirm ; xdg-user-dirs-gtk-update ; xdg-user-dirs-update
-sudo pacman -S gnome
-sudo pacman -S arc-solid-gtk-theme arc-gtk-theme --noconfirm
-sudo pacman -S atom mailnag --noconfirm
-sudo pacman -S networkmanager networkmanager-openconnect networkmanager-openvpn networkmanager-pptp --noconfirm
+sudo pacman -S \
+baobab cheese eog evince file-roller gdm gedit \
+gnome-backgrounds  gnome-calculator gnome-control-center gnome-disk-utility gnome-keyring gnome-logs gnome-screenshot \
+gnome-session gnome-settings-daemon gnome-shell gnome-system-monitor gnome-terminal \
+grilo-plugins gvfs gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb \
+mousetweaks mutter nautilus sushi \
+tracker tracker-miners \
+xdg-user-dirs-gtk xdg-user-dirs \
+arc-solid-gtk-theme arc-gtk-theme \
+atom mailnag \
+networkmanager networkmanager-openconnect networkmanager-openvpn networkmanager-pptp \
+--noconfirm \
+/
+
+xdg-user-dirs-gtk-update ; xdg-user-dirs-update
 sudo systemctl enable NetworkManager.service ; sudo systemctl enable gdm.service ; sudo systemctl enable avahi-daemon.service
 
 ### Install Packages from AUR ###
@@ -91,6 +108,7 @@ sudo snap install spotify
 git clone https://github.com/julio641742/extend-panel-menu.git ; cd extend-panel-menu/
 make all ; make install ; cd .. ; rm extend-panel-menu/ -rvf
 
+## Hide unwanted App launchers ##
 cp -v /usr/share/applications/{bvnc.desktop,bssh.desktop,avahi-discover.desktop,org.gnome.tweaks.desktop,mpv.desktop,qv4l2.desktop,electron.desktop} ~/.local/share/applications/
 echo NoDisplay=true >> ~/.local/share/applications/bvnc.desktop
 echo NoDisplay=true >> ~/.local/share/applications/bssh.desktop
